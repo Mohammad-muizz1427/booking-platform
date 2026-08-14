@@ -4,6 +4,7 @@ import * as serviceController from '../controllers/serviceController.js';
 
 const router = Router();
 
+router.get('/all', serviceController.listAllActiveServices);
 router.use(authenticate);
 router.use(requireRole('provider'));
 

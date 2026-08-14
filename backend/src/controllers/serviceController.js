@@ -70,3 +70,12 @@ export async function deleteService(req, res, next) {
     next(err);
   }
 }
+
+export async function listAllActiveServices(req, res, next) {
+  try {
+    const services = await Service.findAllActiveServices();
+    res.json({ services });
+  } catch (err) {
+    next(err);
+  }
+}

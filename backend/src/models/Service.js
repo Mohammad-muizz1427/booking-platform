@@ -84,10 +84,21 @@ export async function deleteService(id, providerId) {
   return result.rows[0] ?? null;
 }
 
+export async function findAllActiveServices() {
+  const result = await query(
+    `SELECT ${PUBLIC_FIELDS} FROM services
+     WHERE is_active = TRUE
+     ORDER BY created_at DESC`,
+    []
+  );
+  return result.rows.map(mapService);
+}
+
 export default {
   createService,
   findServicesByProvider,
   findServiceById,
   updateService,
   deleteService,
+  findAllActiveServices,
 };
