@@ -4,7 +4,15 @@ import routes from './routes/index.js';
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173' }));
+const allowedOrigins = [
+  'http://localhost:5173',
+  process.env.CLIENT_ORIGIN,
+].filter(Boolean);
+
+app.use(cors({
+  origin: allowedOrigins,
+}));
+
 app.use(express.json());
 
 app.use('/api', routes);
